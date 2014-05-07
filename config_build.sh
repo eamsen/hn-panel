@@ -10,4 +10,4 @@ ROOT_DIRS="locale"
 BEFORE_BUILD=
 AFTER_BUILD=
 PUSH_TO_DEVICE=1
-ANDROID_APP_ID=org.mozilla.fennec_esawin
+ANDROID_APP_ID=org.mozilla.fennec
