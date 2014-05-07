@@ -49,19 +49,11 @@ var FeedHelper = {
   },
 
   feedToItems: function(feed) {
-    function domain(url) {
-      let u = url.substr(url.indexOf("//") + 2);
-      let e = u.indexOf("/");
-      if (e === -1) {
-        e = u.length;
-      }
-      return u.substr(0, e);
-    }
     let items = [];
 
     let item = {
       url: "https://news.ycombinator.com",
-      description: domain("https://news.ycombinator.com"),
+      description: "news.ycombinator.com",
       title: "HACKER NEWS",
       image_url: "http://me73.com/img/hnw.png"
     };
@@ -72,9 +64,14 @@ var FeedHelper = {
       entry.QueryInterface(Ci.nsIFeedEntry);
       entry.link.QueryInterface(Ci.nsIURI);
 
+      let host = entry.link.host;
+      if (host.indexOf("www.") == 0) {
+        host = host.substr(4);
+      }
+
       item = {
         url: entry.link.spec,
-        description: domain(entry.link.spec),
+        description: host,
         title: entry.title.plainText(),
         image_url: "http://me73.com/img/hnwg.png"
       };
