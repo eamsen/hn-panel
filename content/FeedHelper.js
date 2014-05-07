@@ -49,11 +49,21 @@ var FeedHelper = {
   },
 
   feedToItems: function(feed) {
+    function domain(url) {
+      let u = url.substr(url.indexOf("//") + 2);
+      let e = u.indexOf("/");
+      if (e === -1) {
+        e = u.length;
+      }
+      return u.substr(0, e);
+    }
     let items = [];
 
     let item = {
       url: "https://news.ycombinator.com",
-      title: "      HACKER NEWS",
+      description: domain("https://news.ycombinator.com"),
+      title: "HACKER NEWS",
+      image_url: "http://me73.com/img/hnw.png"
     };
     items.push(item);
 
@@ -64,14 +74,17 @@ var FeedHelper = {
 
       item = {
         url: entry.link.spec,
+        description: domain(entry.link.spec),
         title: entry.title.plainText(),
+        image_url: "http://me73.com/img/hnwg.png"
       };
       items.push(item);
 
-      let link = entry.summary.text;
-      let start = link.indexOf('href="') + 6;
-      let end = link.indexOf('">');
-      link = link.substring(start, end);
+      // Comment links
+      // let link = entry.summary.text;
+      // let start = link.indexOf('href="') + 6;
+      // let end = link.indexOf('">');
+      // link = link.substring(start, end);
       // item = {
         // url: link,
         // title: "..."

@@ -29,7 +29,11 @@ function optionsCallback() {
     views: [{
       type: Home.panels.View.LIST,
       dataset: DATASET_ID,
-      onrefresh: refreshDataset
+      onrefresh: refreshDataset,
+      empty: {
+        text: "Woops",
+        imageUrl: "http://me73.com/img/hn.png"
+      }
     }]
   };
 }
