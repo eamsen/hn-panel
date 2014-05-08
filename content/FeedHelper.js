@@ -48,6 +48,10 @@ var FeedHelper = {
     xhr.send(null);
   },
 
+  imageUrl: function(url) {
+    return "http://rndpng.me73.com/" + url;
+  },
+
   feedToItems: function(feed) {
     let items = [];
 
@@ -55,9 +59,12 @@ var FeedHelper = {
       url: "https://news.ycombinator.com",
       description: "news.ycombinator.com",
       title: "HACKER NEWS",
+      // title: img,
       image_url: "http://me73.com/img/hnw.png"
+      // image_url: img
     };
     items.push(item);
+    //browser.parentNode.removeChild(browser);
 
     for (let i = 0; i < feed.items.length; i++) {
       let entry = feed.items.queryElementAt(i, Ci.nsIFeedEntry);
@@ -73,20 +80,20 @@ var FeedHelper = {
         url: entry.link.spec,
         description: host,
         title: entry.title.plainText(),
-        image_url: "http://me73.com/img/hnwg.png"
+        image_url: this.imageUrl(host)
       };
       items.push(item);
 
       // Comment links
-      // let link = entry.summary.text;
-      // let start = link.indexOf('href="') + 6;
-      // let end = link.indexOf('">');
-      // link = link.substring(start, end);
+      // let commentLink = entry.summary.text;
+      // let start = commentLink.indexOf('href="') + 6;
+      // let end = commentLink.indexOf('">');
+      // commentLink = commentLink.substring(start, end);
       // item = {
-        // url: link,
-        // title: "..."
+        // url: commentLink,
+        // title: "...",
+        // image_url: "http://me73.com/img/hnwg.png"
       // };
-
       // items.push(item);
     }
     return items;
